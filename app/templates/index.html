@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="posts">
+    <div class="articles">
+        {% for post in posts %}
+        {% include "_post.html" %}
+        {% endfor %}
+    </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+                <button class="outline contrast" hx-get="{{ prev_url }}" hx-target="#posts" 
+                        hx-swap="innerHTML"{% if not prev_url %} disabled{% endif %}>
+                    &larr; Newer Posts
+                </button>
+            </li>
+            <li class="page-item">
+                <button class="outline contrast" hx-get="{{ next_url }}" hx-target="#posts" 
+                        hx-swap="innerHTML"{% if not next_url %} disabled{% endif %}>
+                    Older Posts &rarr;
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article  class="container">
+    <header  class="d-flex">
+        <hgroup>
+            <h1>{{ user.fullname }}</h1>
+        </hgroup>
+    </header>
+    <section  class="d-flex">
+        {{ user.about_me }}
+    </section>
+    <footer>
+        <div class="grid d-flex">
+            <div>
+                <small>Joined on {{ moment(user.joined).format('LL') }}</small>
+            </div>
+            <div>
+                <small>Email {{ user.email }}</small>
+            </div>
+        </div>
+    </footer>
+</article>
+
+<div id="posts">
+    <div class="articles">
+        {% for post in posts %}
+        {% include "_post.html" %}
+        {% endfor %}
+    </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+                <button class="outline contrast" hx-get="{{ prev_url }}" hx-target="#posts" 
+                        hx-swap="innerHTML"{% if not prev_url %} disabled{% endif %}>
+                    &larr; Newer Posts
+                </button>
+            </li>
+            <li class="page-item">
+                <button class="outline contrast" hx-get="{{ next_url }}" hx-target="#posts" 
+                        hx-swap="innerHTML"{% if not next_url %} disabled{% endif %}>
+                    Older Posts &rarr;
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

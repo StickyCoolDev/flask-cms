@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pico.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/htmx.min.js') }}"></script>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Welcome to Flask CMS</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <hgroup class="container">
+            <h1>Flask CMS</h1>
+            <h2>Welcome to my blog</h2>
+        </hgroup>
+    </header>
+    <nav class="container">
+        <ul>
+            <li><a href="{{url_for('main.index')}}">Home</a></li>
+            <li><a href="{{url_for('main.about')}}">About</a></li>
+        </ul>
+    </nav>
+    <main id="main" class="container">
+        <section id="blockContent">
+            {% block content %}{% endblock %}
+        </section>
+        {% if g.cms_has_active_widgets %}
+        <aside id="widgets">
+        {% with widgets = g.cms_widgets %}
+        {% for widget in widgets %}
+            <div id="{{widget.name}}"
+                hx-get="{{url_for(widget.location)}}" hx-trigger="load" hx-swap="innerHTML">
+                <span aria-busy="true">loading widget...</span>
+            </div>
+        {% endfor %}
+        {% endwith %}
+        </aside>
+        {% endif %}
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <p>©2025 by Herminio Vargas</p>
+        </div>
+    </footer>
+
+    <!-- reCaptcha Integration -->
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+    <!-- flask momentjs -->
+    {{ moment.include_moment() }}
+
+    <!-- scripts -->
+    <script>
+        document.addEventListener('htmx:afterRequest', function(ev) { 
+            if (ev.detail.target.id == 'posts' || ev.detail.target.id == 'commentaryBox' || ev.detail.target.id == 'nextComment') {
+                flask_moment_render_all(); //Reload dates in flask_moment
+            }
+        } );
+    </script>
+</body>
+</html>

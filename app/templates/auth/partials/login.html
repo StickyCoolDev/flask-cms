@@ -1,0 +1,28 @@
+<div>
+    <form hx-post="{{ url_for('auth.login') }}" hx-swap="innerHTML" hx-target="#commentForm">
+        <fieldset role="group">
+            {{ form.username.label }}
+            {{ form.username() }}
+            {% if form.username.errors %}
+            {% for error in form.username.errors %}
+            <small>{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+    
+            {{ form.password.label }}
+            {{ form.password() }}
+            {% if form.password.errors %}
+            {% for error in form.password.errors %}
+            <small>{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </fieldset>
+        <fieldset>
+            {{ form.remember.label }} {{ form.remember() }}
+            {{ form.submit() }}
+        </fieldset>
+    </form>
+
+    <p>New user? <a href="{{ url_for('auth.register') }}">Register</a></p>
+    <p><a href="{{ url_for('auth.reset_password_request') }}">I forgot my password</a></p>
+</div>

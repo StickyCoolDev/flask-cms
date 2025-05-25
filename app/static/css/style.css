@@ -1,0 +1,55 @@
+body>main {
+    display: grid;
+    grid-template-rows: 1fr;
+    row-gap: 2rem;
+    padding: 0;
+}
+
+body>main>* {
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+@media(min-width: 1024px) {
+    body>main:has(aside#widgets) {
+        grid-template-rows: 1fr;
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: "body sidebar";
+        -moz-column-gap: 3rem;
+        column-gap: 3rem;
+        row-gap: 3rem;
+    }
+
+    body>main>aside#widgets {
+        grid-area: sidebar
+    }
+}
+
+.badge-primary {
+  background-color: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.badge-secondary {
+    background-color: var(--pico-secondary-background);
+    color: var(--pico-secondary-inverse);
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.badge-contrast {
+    background-color: var(--pico-contrast-background);
+    color: var(--pico-contrast-inverse);
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-around;
+}

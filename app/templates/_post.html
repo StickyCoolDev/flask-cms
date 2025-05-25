@@ -1,0 +1,29 @@
+<article>
+    <header>
+        {% include "_header.html" %}
+    </header>
+    <section>{{post.resume | safe}}</section>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="{{url_for('main.post', slug=post.slug)}}">Continue reading...</a></li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="{{url_for('main.post', slug=post.slug, _anchor='comments')}}" 
+                        role="button" class="outline contrast">
+                        {% with comments = post.comment_count() %}
+                        {% if comments == 0 %}
+                        No comments yet
+                        {% elif comments == 1 %}
+                        1 comment
+                        {% else %}
+                        {{ comments }} comments
+                        {% endif%}
+                        {% endwith %}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+</article>

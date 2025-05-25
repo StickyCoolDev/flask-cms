@@ -1,0 +1,11 @@
+<hgroup>
+    <h1>{{ post.title }}</h1>
+    <p>Posted by <a href="{{ url_for('main.user', username=post.author.username)}}">{{ post.author.fullname }}</a> 
+    {{ moment(post.timestamp).fromNow() }} under 
+    <a href="{{ url_for('main.category', categoryname=post.category.category) }}">{{ post.category.category }}</a></p>
+</hgroup>
+<p>
+    {% for tag in post.taglist %}
+    <a class="badge-primary" href="{{url_for('main.tag', tagname=tag.tag)}}">{{tag.tag}}</a>
+    {% endfor %}
+</p>

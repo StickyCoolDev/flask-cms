@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+    <header>
+        <h3>About me</h3>
+    </header>
+    {% if info %}
+    <p>{{info.additional_data}}</p>
+    {% else %}
+    <p>Under construction</p>
+    {% endif %}
+</article>
+
+{% endblock %}

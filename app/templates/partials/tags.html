@@ -1,0 +1,20 @@
+<article>
+    <header>
+        <h5>Tags</h5>
+    </header>
+    <aside>
+        <nav>
+            <ul>
+                {% for tag in tags %}
+                <li>
+                    <div class="grid">
+                        <div><a href="{{ url_for('main.tag', tagname=tag.tag) }}">{{ tag.tag }}</a></div>
+                        <div>&nbsp;</div>
+                        <div>{{ tag.count }}</div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+</article>

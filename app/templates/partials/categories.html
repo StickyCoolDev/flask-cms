@@ -1,0 +1,14 @@
+<article>
+    <header>
+        <h5>Categories</h5>
+    </header>
+    <aside>
+        <nav>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{{url_for('main.category', categoryname=category.category)}}">{{category.category}}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+</article>
