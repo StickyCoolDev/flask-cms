@@ -1,3 +1,4 @@
+from app import db, login
 import sqlalchemy as sa
 from sqlalchemy import event
 import sqlalchemy.orm as so
@@ -7,7 +8,7 @@ from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import login, db
+
 
 post_tags = sa.Table('post_tags', db.metadata,
                      sa.Column('post_id', sa.Integer, sa.ForeignKey('post.id')),

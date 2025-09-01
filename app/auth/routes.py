@@ -3,13 +3,14 @@ from flask import current_app, redirect, render_template, url_for, request, flas
 from flask_login import current_user, login_user
 from urllib.parse import urlsplit
 
-from app import db, htmx
+
 from app.models import User
-from app.auth import bp
+from . import bp
 from app.auth.forms import LoginForm, RegisterForm
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    htmx = request.headers.get('HX-Request') == 'true'
     if current_user.is_authenticated and not htmx:
         return redirect(url_for('main.index'))
 
@@ -60,7 +61,7 @@ def validate_email(token: str):
 def reset_password_request():
     pass
 
-@bp.route('reset_password/<token>', methods=['GET','POST'])
+@bp.route('/reset_password/<token>', methods=['GET','POST'])
 def reset_password(token: str):
     pass
 
