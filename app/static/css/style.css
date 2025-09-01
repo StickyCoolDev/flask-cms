@@ -1,3 +1,12 @@
+:root {
+  --pico-primary: #FFFFFF;
+  --pico-color: var(--pico-primary)
+  --pico-primary-hover: #4a8bb3;
+  --pico-primary-focus: rgba(89, 166, 212, 0.125);
+  --pico-secondary: #000000;
+  --pico-background-color: #000000;
+}
+
 body>main {
     display: grid;
     grid-template-rows: 1fr;
@@ -8,6 +17,10 @@ body>main {
 body>main>* {
     min-width: 0;
     margin-bottom: 0;
+}
+
+**{
+  color: var(--pico-color);
 }
 
 @media(min-width: 1024px) {
@@ -21,7 +34,7 @@ body>main>* {
     }
 
     body>main>aside#widgets {
-        grid-area: sidebar
+        grid-area: sidebar;
     }
 }
 
